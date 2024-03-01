@@ -13,9 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body:Center(child: Text('Home Screen')),
-      drawer: SafeArea(
-        child: DrawerScreen(),
-      ),
+      drawer: DrawerScreen(),
     );
   }
 }
