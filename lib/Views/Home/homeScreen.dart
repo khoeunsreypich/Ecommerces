@@ -38,13 +38,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   'Hello',
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
                 ),
-                Text('Welcome to Laza'),
-                Padding(
-                  padding: EdgeInsets.only(top: 50),
-                  child: Text(
-                    'Choose Brand',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                Text('Welcome to Laza',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16),),
+                SizedBox(height: 20,),
+                Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.grey.shade200
                   ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Row(
+                      children: [
+                        Icon(Icons.search),
+                        Text('Search',style: TextStyle(fontSize: 18),),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15,),
+                Text(
+                  'Choose Brand',
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                 ),
                 SizedBox(
                   height: 15,
@@ -57,13 +72,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: 10,
                       itemBuilder: (context,index)=> HomeBrand(),),
                 ),
-
+                SizedBox(
+                  height: 15,
+                ),
                 Text(
                   'New Arrival ',
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height*.98,
