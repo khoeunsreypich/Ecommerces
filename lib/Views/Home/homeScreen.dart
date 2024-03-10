@@ -1,5 +1,8 @@
+import 'package:ecommerce/Data/response/status.dart';
+import 'package:ecommerce/ViewModels/product_vm.dart';
 import 'package:ecommerce/Views/Home/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'home_brand.dart';
 import 'home_product.dart';
@@ -12,6 +15,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _productViewModel = ProductViewModel();
+  @override
+  void initState() {
+    super.initState();
+    _productViewModel.getAllProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,10 +95,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height*.98,
                   width: MediaQuery.of(context).size.width * .90,
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: 10,
-               itemBuilder: (context,index)=>HomeProduct(),
+                  child: ChangeNotifierProvider(
+                    create: (context) => _productViewModel,
+                    child: Consumer<ProductViewModel>(
+                        builder: (context,viewModel,_){
+                    switch(viewModel.response.status!){
+                      case Status.LOADING:
+                        return Text('Hello');
+                      case Status.COMPLETED:
+                      return ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemCount: 10,
+                            itemBuilder: (context,index){
+                              var products = viewModel.response.data!.data![index];
+                              return HomeProduct(products: products,);
+                            });
+                      case Status.ERROR:
+                        return Text('Error');
+                    }
+                        },
+                    ),
                   ),
                 ),
               ],

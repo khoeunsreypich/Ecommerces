@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../Models/Request/product.dart';
+
 class HomeProduct extends StatelessWidget {
-  const HomeProduct({super.key});
+  HomeProduct({this.products});
+
+  Datum? products;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +26,13 @@ class HomeProduct extends StatelessWidget {
                     child: SizedBox(
                       height: 270,
                       width: 180,
+                      // child: Image.network(
+                      //   'https://cms.istad.co${restaurant!.attributes!.picture!.data!.attributes!.url!}',
+                      //   fit: BoxFit.fill,
+                      // ),
                       child: Image.network(
-                          'https://i0.wp.com/blog.watermarkup.com/wp-content/uploads/2022/03/clothing-photography-ideas-18.jpeg?resize=500%2C750'),
+                        'baseUrl${products?.attributes?.thumbnail}'
+                          ),
                     )),
                 SizedBox(height: 8,),
                 Column(
