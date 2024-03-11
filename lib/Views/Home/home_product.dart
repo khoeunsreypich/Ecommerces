@@ -1,19 +1,28 @@
+import 'package:ecommerce/ViewModels/product_vm.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../Models/Request/product.dart';
 
-class HomeProduct extends StatelessWidget {
-  HomeProduct({this.products});
+class HomeProduct extends StatefulWidget {
+  HomeProduct({super.key, this.products});
 
   Datum? products;
 
   @override
+  State<HomeProduct> createState() => _HomeProductState();
+}
+
+class _HomeProductState extends State<HomeProduct> {
+  var productViewModel = ProductViewModel();
+
+  @override
   Widget build(BuildContext context) {
      return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+      //scrollDirection: Axis.horizontal,
       child: SizedBox(
-       // height: MediaQuery.of(context).size.height*.98,
-        height: 360,
+        height: MediaQuery.of(context).size.height*.98,
+       // height: 360,
         width: MediaQuery.of(context).size.width * .90,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -21,58 +30,30 @@ class HomeProduct extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: SizedBox(
-                      height: 270,
-                      width: 180,
-                      // child: Image.network(
-                      //   'https://cms.istad.co${restaurant!.attributes!.picture!.data!.attributes!.url!}',
-                      //   fit: BoxFit.fill,
-                      // ),
-                      child: Image.network(
-                        'baseUrl${products?.attributes?.thumbnail}'
-                          ),
-                    )),
-                SizedBox(height: 8,),
-                Column(
-                  children: [Text('Adidas For Girl',style: TextStyle(fontWeight: FontWeight.w500),)],
-                ),
-                Column(
-                  children: [Text('Fashion',style: TextStyle(fontWeight: FontWeight.w500),)],
-                ),
-                Column(
-                  children: [Text('\$ 99',style: TextStyle(fontWeight: FontWeight.w500),)],
-                ),
-              ],
-            ),
+                Container(
+                  color: Colors.yellowAccent,
 
-            Column(
-              crossAxisAlignment:CrossAxisAlignment.start ,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: SizedBox(
-                          height: 270,
-                          width: 180,
-                          child: Image.network(
-                              'https://i0.wp.com/blog.watermarkup.com/wp-content/uploads/2022/03/clothing-photography-ideas-18.jpeg?resize=500%2C750'),
-                        )),
-                    //SizedBox(height: 8,),
-                  ],
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: SizedBox(
+                        height: 250,
+                        width: MediaQuery.of(context).size.width*.50,
+                        child: Image.network(
+                          //'https://cms.istad.co${widget.products!.attributes!.thumbnail!.data!.attributes!.url!}',
+                          'https://cms.istad.co${widget.products?.attributes?.thumbnail?.data?.attributes?.url}',
+                          fit: BoxFit.fill,
+                            ),
+                      )),
                 ),
                 SizedBox(height: 8,),
                 Column(
-                  children: [Text('Adidas For Girl',style: TextStyle(fontWeight: FontWeight.w500),)],
+                  children: [Text('${widget.products!.attributes!.title!}',style: TextStyle(fontWeight: FontWeight.w500),)],
                 ),
                 Column(
-                  children: [Text('Fashion',style: TextStyle(fontWeight: FontWeight.w500),)],
+                  children: [Text('${widget.products!.attributes!.rating!} *****',style: TextStyle(fontWeight: FontWeight.w500),)],
                 ),
                 Column(
-                  children: [Text('\$ 99',style: TextStyle(fontWeight: FontWeight.w500),)],
+                  children: [Text('\$ ${widget.products!.attributes!.price!}',style: TextStyle(fontWeight: FontWeight.w500),)],
                 ),
               ],
             ),

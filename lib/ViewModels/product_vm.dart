@@ -32,7 +32,7 @@ class ProductViewModel extends ChangeNotifier{
      this.response = response;
      notifyListeners();
   }
-  Future<dynamic> getAllProducts() async {
+  Future<dynamic> getAllProduct() async {
    await _productRepo.getAllProducts()
       .then((product) => setProductList(ApiResponse.completed(product)))
        .onError((error, stackTrace)

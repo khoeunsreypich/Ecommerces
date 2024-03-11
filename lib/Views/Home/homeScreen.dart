@@ -1,6 +1,7 @@
 import 'package:ecommerce/Data/response/status.dart';
 import 'package:ecommerce/ViewModels/product_vm.dart';
 import 'package:ecommerce/Views/Home/drawer.dart';
+import 'package:ecommerce/Views/Skeleton/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _productViewModel.getAllProducts();
+    _productViewModel.getAllProduct();
   }
 
   @override
@@ -28,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       //backgroundColor: globals.pageBackgroundColor,
       appBar: AppBar(
-          title: Text('Company name'),
+          title: Text('Back'),
           leading: new IconButton(
               icon: new Icon(Icons.arrow_back),
               onPressed: () {
@@ -78,7 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 55,
                   width: MediaQuery.of(context).size.width * .90,
                   child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
                     itemCount: 10,
                       itemBuilder: (context,index)=> HomeBrand(),),
                 ),
@@ -89,26 +89,31 @@ class _HomeScreenState extends State<HomeScreen> {
                   'New Arrival ',
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                 ),
+                const SizedBox(height: 15,),
+
+
+
                 SizedBox(
-                  height: 15,
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height*.98,
-                  width: MediaQuery.of(context).size.width * .90,
+                  height: 350,
+                 //height: MediaQuery.of(context).size.height*.98,
+                // width: MediaQuery.of(context).size.width * .90,
                   child: ChangeNotifierProvider(
                     create: (context) => _productViewModel,
                     child: Consumer<ProductViewModel>(
                         builder: (context,viewModel,_){
                     switch(viewModel.response.status!){
                       case Status.LOADING:
-                        return Text('Hello');
+                        return ListView.builder(
+                            scrollDirection:Axis.horizontal,
+                            itemCount: 10,
+                            itemBuilder: (context,index) => ProductCardSkeleton());
                       case Status.COMPLETED:
                       return ListView.builder(
-                            scrollDirection: Axis.vertical,
+                            scrollDirection: Axis.horizontal,
                             itemCount: 10,
-                            itemBuilder: (context,index){
-                              var products = viewModel.response.data!.data![index];
-                              return HomeProduct(products: products,);
+                            itemBuilder: ( context, index){
+                              var product = viewModel.response.data!.data![index];
+                              return HomeProduct(products: product,);
                             });
                       case Status.ERROR:
                         return Text('Error');
