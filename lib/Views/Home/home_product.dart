@@ -21,7 +21,7 @@ class _HomeProductState extends State<HomeProduct> {
      return SingleChildScrollView(
       //scrollDirection: Axis.horizontal,
       child: SizedBox(
-        height: MediaQuery.of(context).size.height*.98,
+        height: MediaQuery.of(context).size.height*.50,
        // height: 360,
         width: MediaQuery.of(context).size.width * .90,
         child: Row(
@@ -39,7 +39,6 @@ class _HomeProductState extends State<HomeProduct> {
                         height: 250,
                         width: MediaQuery.of(context).size.width*.50,
                         child: Image.network(
-                          //'https://cms.istad.co${widget.products!.attributes!.thumbnail!.data!.attributes!.url!}',
                           'https://cms.istad.co${widget.products?.attributes?.thumbnail?.data?.attributes?.url}',
                           fit: BoxFit.fill,
                             ),

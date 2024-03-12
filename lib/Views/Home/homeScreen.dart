@@ -79,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 55,
                   width: MediaQuery.of(context).size.width * .90,
                   child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
                     itemCount: 10,
                       itemBuilder: (context,index)=> HomeBrand(),),
                 ),
@@ -94,9 +95,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
                 SizedBox(
-                  height: 350,
-                 //height: MediaQuery.of(context).size.height*.98,
-                // width: MediaQuery.of(context).size.width * .90,
+                  //height: 350,
+                 height: MediaQuery.of(context).size.height*.40,
+                // width: MediaQuery.of(context).size.width * .50,
                   child: ChangeNotifierProvider(
                     create: (context) => _productViewModel,
                     child: Consumer<ProductViewModel>(
