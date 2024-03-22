@@ -1,9 +1,15 @@
-import 'package:flutter/cupertino.dart';
+import 'package:ecommerce/Models/Request/category.dart';
 import 'package:flutter/material.dart';
 
-class HomeBrand extends StatelessWidget {
-  const HomeBrand({super.key});
+class HomeBrand extends StatefulWidget {
+   HomeBrand({super.key,this.category});
+  Datum? category ;
 
+  @override
+  State<HomeBrand> createState() => _HomeBrandState();
+}
+
+class _HomeBrandState extends State<HomeBrand> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -34,15 +40,16 @@ class HomeBrand extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                             color: Colors.white,
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.network(
-                                'https://cdn.icon-icons.com/icons2/2699/PNG/512/adidas_logo_icon_168690.png'),
-                          ))),
-                  Text(
-                    'Adidas',
-                    style:
-                    TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+                          child: Image.network(
+                              '${widget.category?.attributes?.iconUrl}'))),
+                  Padding(
+                    padding: new EdgeInsets.only(right: 10.0),
+                    child: Text(
+                      '${widget.category?.attributes?.title}',
+                      overflow:TextOverflow.ellipsis,
+                      style:
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ],
               ),

@@ -58,7 +58,7 @@ class DatumAttributes {
   String? description;
   String? quantity;
   Category? category;
-  Thumbnail? thumbnail;
+  Category? thumbnail;
 
   DatumAttributes({
     this.title,
@@ -83,7 +83,7 @@ class DatumAttributes {
     description: json["description"],
     quantity: json["quantity"],
     category: json["category"] == null ? null : Category.fromJson(json["category"]),
-    thumbnail: json["thumbnail"] == null ? null : Thumbnail.fromJson(json["thumbnail"]),
+    thumbnail: json["thumbnail"] == null ? null : Category.fromJson(json["thumbnail"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -101,14 +101,14 @@ class DatumAttributes {
 }
 
 class Category {
-  CategoryData? data;
+  Data? data;
 
   Category({
     this.data,
   });
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-    data: json["data"] == null ? null : CategoryData.fromJson(json["data"]),
+    data: json["data"] == null ? null : Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -116,18 +116,18 @@ class Category {
   };
 }
 
-class CategoryData {
+class Data {
   int? id;
-  PurpleAttributes? attributes;
+  DataAttributes? attributes;
 
-  CategoryData({
+  Data({
     this.id,
     this.attributes,
   });
 
-  factory CategoryData.fromJson(Map<String, dynamic> json) => CategoryData(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
     id: json["id"],
-    attributes: json["attributes"] == null ? null : PurpleAttributes.fromJson(json["attributes"]),
+    attributes: json["attributes"] == null ? null : DataAttributes.fromJson(json["attributes"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -136,75 +136,7 @@ class CategoryData {
   };
 }
 
-class PurpleAttributes {
-  String? title;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  DateTime? publishedAt;
-  String? iconUrl;
-
-  PurpleAttributes({
-    this.title,
-    this.createdAt,
-    this.updatedAt,
-    this.publishedAt,
-    this.iconUrl,
-  });
-
-  factory PurpleAttributes.fromJson(Map<String, dynamic> json) => PurpleAttributes(
-    title: json["title"],
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    publishedAt: json["publishedAt"] == null ? null : DateTime.parse(json["publishedAt"]),
-    iconUrl: json["iconUrl"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "title": title,
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
-    "publishedAt": publishedAt?.toIso8601String(),
-    "iconUrl": iconUrl,
-  };
-}
-
-class Thumbnail {
-  ThumbnailData? data;
-
-  Thumbnail({
-    this.data,
-  });
-
-  factory Thumbnail.fromJson(Map<String, dynamic> json) => Thumbnail(
-    data: json["data"] == null ? null : ThumbnailData.fromJson(json["data"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "data": data?.toJson(),
-  };
-}
-
-class ThumbnailData {
-  int? id;
-  FluffyAttributes? attributes;
-
-  ThumbnailData({
-    this.id,
-    this.attributes,
-  });
-
-  factory ThumbnailData.fromJson(Map<String, dynamic> json) => ThumbnailData(
-    id: json["id"],
-    attributes: json["attributes"] == null ? null : FluffyAttributes.fromJson(json["attributes"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "attributes": attributes?.toJson(),
-  };
-}
-
-class FluffyAttributes {
+class DataAttributes {
   String? name;
   dynamic alternativeText;
   dynamic caption;
@@ -217,12 +149,12 @@ class FluffyAttributes {
   double? size;
   String? url;
   dynamic previewUrl;
-  String? provider;
+  Provider? provider;
   dynamic providerMetadata;
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  FluffyAttributes({
+  DataAttributes({
     this.name,
     this.alternativeText,
     this.caption,
@@ -241,7 +173,7 @@ class FluffyAttributes {
     this.updatedAt,
   });
 
-  factory FluffyAttributes.fromJson(Map<String, dynamic> json) => FluffyAttributes(
+  factory DataAttributes.fromJson(Map<String, dynamic> json) => DataAttributes(
     name: json["name"],
     alternativeText: json["alternativeText"],
     caption: json["caption"],
@@ -254,7 +186,7 @@ class FluffyAttributes {
     size: json["size"]?.toDouble(),
     url: json["url"],
     previewUrl: json["previewUrl"],
-    provider: json["provider"],
+    provider: providerValues.map[json["provider"]]!,
     providerMetadata: json["provider_metadata"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
@@ -273,7 +205,7 @@ class FluffyAttributes {
     "size": size,
     "url": url,
     "previewUrl": previewUrl,
-    "provider": provider,
+    "provider": providerValues.reverse[provider],
     "provider_metadata": providerMetadata,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
@@ -281,11 +213,13 @@ class FluffyAttributes {
 }
 
 enum Ext {
-  JPG
+  JPG,
+  PNG
 }
 
 final extValues = EnumValues({
-  ".jpg": Ext.JPG
+  ".jpg": Ext.JPG,
+  ".png": Ext.PNG
 });
 
 class Formats {
@@ -365,11 +299,21 @@ class Large {
 }
 
 enum Mime {
-  APPLICATION_OCTET_STREAM
+  APPLICATION_OCTET_STREAM,
+  IMAGE_PNG
 }
 
 final mimeValues = EnumValues({
-  "application/octet-stream": Mime.APPLICATION_OCTET_STREAM
+  "application/octet-stream": Mime.APPLICATION_OCTET_STREAM,
+  "image/png": Mime.IMAGE_PNG
+});
+
+enum Provider {
+  LOCAL
+}
+
+final providerValues = EnumValues({
+  "local": Provider.LOCAL
 });
 
 class Meta {

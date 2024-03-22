@@ -1,4 +1,5 @@
 import 'package:ecommerce/Data/response/status.dart';
+import 'package:ecommerce/ViewModels/category_vm.dart';
 import 'package:ecommerce/ViewModels/product_vm.dart';
 import 'package:ecommerce/Views/Home/drawer.dart';
 import 'package:ecommerce/Views/Skeleton/skeleton.dart';
@@ -17,10 +18,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _productViewModel = ProductViewModel();
+  final _categoryViewModel = CategoryViewModel();
   @override
   void initState() {
     super.initState();
     _productViewModel.getAllProduct();
+    _categoryViewModel.getAllCategory();
   }
 
   @override
@@ -78,10 +81,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 55,
                   width: MediaQuery.of(context).size.width * .90,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                      itemBuilder: (context,index)=> HomeBrand(),),
+                  child:ChangeNotifierProvider(
+                    create: (context) => _categoryViewModel,
+                    child: Consumer<CategoryViewModel>(
+                      builder: (context,viewModel,_){
+                        switch(viewModel.response.status!){
+                          case Status.LOADING:
+                            return ListView.builder(
+                                scrollDirection:Axis.horizontal,
+                                itemCount: 10,
+                                itemBuilder: (context,index) => ProductCardSkeleton());
+                          case Status.COMPLETED:
+                            return ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 10,
+                                itemBuilder: ( context, index){
+                                  var categories = viewModel.response.data!.data![index];
+                                  return HomeBrand(category:categories,);
+                                });
+                          case Status.ERROR:
+                            return Text('Error');
+                        }
+                      },
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 15,
@@ -106,12 +129,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       case Status.LOADING:
                         return ListView.builder(
                             scrollDirection:Axis.horizontal,
-                            itemCount: 10,
+                            itemCount: 11,
                             itemBuilder: (context,index) => ProductCardSkeleton());
                       case Status.COMPLETED:
                       return ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: 10,
+                            itemCount: 11,
                             itemBuilder: ( context, index){
                               var product = viewModel.response.data!.data![index];
                               return HomeProduct(products: product,);
