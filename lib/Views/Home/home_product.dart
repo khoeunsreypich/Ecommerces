@@ -1,5 +1,4 @@
 import 'package:ecommerce/ViewModels/product_vm.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../Models/Request/product.dart';
@@ -23,7 +22,7 @@ class _HomeProductState extends State<HomeProduct> {
       child: SizedBox(
         height: MediaQuery.of(context).size.height*.50,
        // height: 360,
-        width: MediaQuery.of(context).size.width * .90,
+        width: MediaQuery.of(context).size.width * .60,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

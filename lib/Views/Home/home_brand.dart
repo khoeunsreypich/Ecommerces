@@ -13,40 +13,39 @@ class _HomeBrandState extends State<HomeBrand> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60,
-      //width: 300,
-      width: MediaQuery.of(context).size.width * .35,
+      width: MediaQuery.of(context).size.width * .36,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-           // width: MediaQuery.of(context).size.width * .35,
+            width: 140,
             decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(10),
+              // color: Colors.grey.shade200,
+              color: Colors.yellowAccent,
+              borderRadius: BorderRadius.circular(10.0),
             ),
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(5.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                 children: [
-                  SizedBox(
-                      height: 50,
-                      width: 50,
-                      child: Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.white,
-                          ),
-                          child: Image.network(
-                              '${widget.category?.attributes?.iconUrl}'))),
+                  Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.white,
+                      ),
+                      child: SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Image.network(
+                            '${widget.category?.attributes?.iconUrl}'),
+                      )),
                   Padding(
-                    padding: new EdgeInsets.only(right: 10.0),
-                    child: Text(
+                    padding: new EdgeInsets.only(left: 15.0),
+                    child: new Text(
                       '${widget.category?.attributes?.title}',
                       overflow:TextOverflow.ellipsis,
+
                       style:
                       TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
