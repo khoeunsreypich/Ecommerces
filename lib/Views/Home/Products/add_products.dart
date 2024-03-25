@@ -23,7 +23,7 @@ class _AddProductsState extends State<AddProducts> {
   final publishedAtController = TextEditingController();
   final categoryController = Category();
   final _productViewModel = ProductViewModel();
-final thumbnailController = Thumbnail();
+  final thumbnailController = Thumbnail();
   var imgFile;
   var productId;
   var imgId;
