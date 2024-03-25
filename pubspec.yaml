@@ -39,6 +39,7 @@ dependencies:
   provider:
   skeletonizer: ^1.0.1
   image_picker: ^1.0.7
+  swipe_to:
 
 dev_dependencies:
   flutter_test:

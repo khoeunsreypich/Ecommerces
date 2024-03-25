@@ -2,6 +2,7 @@ import 'package:ecommerce/Data/response/status.dart';
 import 'package:ecommerce/ViewModels/category_vm.dart';
 import 'package:ecommerce/ViewModels/product_vm.dart';
 import 'package:ecommerce/Views/Home/Products/add_products.dart';
+import 'package:ecommerce/Views/Home/Products/product_details.dart';
 import 'package:ecommerce/Views/Home/drawer.dart';
 import 'package:ecommerce/Views/Skeleton/skeleton.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,8 @@ import 'Categories/home_brand.dart';
 import 'Products/home_product.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+   HomeScreen({super.key,this.id});
+  int ?id;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -137,12 +139,26 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemBuilder: (context,index) => ProductCardSkeleton());
                       case Status.COMPLETED:
                       return ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 11,
-                            itemBuilder: ( context, index){
-                              var product = viewModel.response.data!.data![index];
-                              return HomeProduct(products: product,);
-                            });
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 11,
+                                  itemBuilder: ( context, index) {
+                                    var product = viewModel.response.data!.data![index];
+                                    return InkWell(
+                                        child: HomeProduct(products: product,),
+                                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetails(products: product,),));},
+                                    );
+                                  }
+                                    );
+
+                              // SwipeTo(
+                              //   child: ListTile(
+                              //     onTap:() {
+                              //       var product = viewModel.response.data!.data![index];
+                              //        HomeProduct(products: product,);
+                              //       Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetails(products: product,),));},
+                              //   ),
+                              // );
+
                       case Status.ERROR:
                         return Text('Error');
                     }

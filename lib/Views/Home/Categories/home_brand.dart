@@ -20,8 +20,8 @@ class _HomeBrandState extends State<HomeBrand> {
           Container(
             width: 140,
             decoration: BoxDecoration(
-              // color: Colors.grey.shade200,
-              color: Colors.yellowAccent,
+               color: Colors.grey.shade200,
+              // color: Colors.yellowAccent,
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Padding(
