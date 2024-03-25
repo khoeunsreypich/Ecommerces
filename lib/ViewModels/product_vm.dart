@@ -19,13 +19,13 @@
 //
 // }
 import 'package:ecommerce/Data/response/api_response.dart';
-import 'package:ecommerce/Repository/product_repo.dart';
+import 'package:ecommerce/Repository/ecommerce_repo.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../Models/Request/product.dart';
 
 class ProductViewModel extends ChangeNotifier{
-  final _productRepo = ProductRepository();
+  final _productRepo = EcommerceRepository();
   ApiResponse<Products> response = ApiResponse.loading();
 
   setProductList(response) {
@@ -39,4 +39,10 @@ class ProductViewModel extends ChangeNotifier{
     => setProductList(ApiResponse.error(stackTrace.toString())));
    }
 
+   Future<dynamic> postProducts(data,{id}) async {
+    setProductList(ApiResponse.loading());
+    await _productRepo.postProducts(data, id: id)
+    .then((isPost) => setProductList(ApiResponse.completed(isPost)))
+    .onError((error, stackTrace) => setProductList(ApiResponse.error(stackTrace.toString())));
+   }
 }

@@ -20,13 +20,13 @@
 // }
 import 'package:ecommerce/Data/response/api_response.dart';
 import 'package:ecommerce/Models/Request/category.dart';
-import 'package:ecommerce/Repository/product_repo.dart';
+import 'package:ecommerce/Repository/ecommerce_repo.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../Models/Request/product.dart';
 
 class CategoryViewModel extends ChangeNotifier{
-  final _categoryRepo = ProductRepository();
+  final _categoryRepo = EcommerceRepository();
   ApiResponse<Categories> response = ApiResponse.loading();
 
   setProductList(response) {

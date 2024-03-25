@@ -3,7 +3,7 @@ import 'package:ecommerce/Models/Request/category.dart';
 import 'package:ecommerce/Models/Request/product.dart';
 import 'package:ecommerce/Res/url.dart';
 
-class ProductRepository{
+class EcommerceRepository{
   var apiService = ApiService();
   Future<Products> getAllProducts() async {
     try{
@@ -20,6 +20,14 @@ class ProductRepository{
     }catch (exception){
       rethrow;
     }
+  }
+
+  Future<bool> postProducts(data,{id})async{
+    print('restaurant id $id');
+    var productRequest = productsToJson(data);
+    var url =ClsUrl.postProduct;
+    dynamic response = await apiService.postProduct(url, productRequest);
+    return response;
   }
 
 }

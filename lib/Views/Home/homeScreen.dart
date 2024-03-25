@@ -1,13 +1,14 @@
 import 'package:ecommerce/Data/response/status.dart';
 import 'package:ecommerce/ViewModels/category_vm.dart';
 import 'package:ecommerce/ViewModels/product_vm.dart';
+import 'package:ecommerce/Views/Home/Products/add_products.dart';
 import 'package:ecommerce/Views/Home/drawer.dart';
 import 'package:ecommerce/Views/Skeleton/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'home_brand.dart';
-import 'home_product.dart';
+import 'Categories/home_brand.dart';
+import 'Products/home_product.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -48,6 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
               //mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                IconButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AddProducts(),),);
+                }, icon: Icon(Icons.add)),
                 Text(
                   'Hello',
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),

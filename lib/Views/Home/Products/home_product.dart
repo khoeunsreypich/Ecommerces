@@ -1,7 +1,7 @@
 import 'package:ecommerce/ViewModels/product_vm.dart';
 import 'package:flutter/material.dart';
 
-import '../../Models/Request/product.dart';
+import '../../../Models/Request/product.dart';
 
 class HomeProduct extends StatefulWidget {
   HomeProduct({super.key, this.products});
