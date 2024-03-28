@@ -30,7 +30,7 @@ class _HomeProductState extends State<HomeProduct> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  color: Colors.yellowAccent,
+                  color: Colors.deepOrangeAccent,
 
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
@@ -45,7 +45,8 @@ class _HomeProductState extends State<HomeProduct> {
                 ),
                 SizedBox(height: 8,),
                 Column(
-                  children: [Text('${widget.products!.attributes!.title!}',style: TextStyle(fontWeight: FontWeight.w500),)],
+                  children: [Text('${widget.products!.attributes!.title!}',
+                    style: TextStyle(fontWeight: FontWeight.w500),)],
                 ),
                 Column(
                   children: [Text('${widget.products!.attributes!.rating!} *****',style: TextStyle(fontWeight: FontWeight.w500),)],

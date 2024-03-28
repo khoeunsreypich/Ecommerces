@@ -13,12 +13,12 @@ class _HomeBrandState extends State<HomeBrand> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * .36,
+      width: MediaQuery.of(context).size.width * .40,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            width: 140,
+            width: 150,
             decoration: BoxDecoration(
                color: Colors.grey.shade200,
               // color: Colors.yellowAccent,
@@ -41,14 +41,18 @@ class _HomeBrandState extends State<HomeBrand> {
                             '${widget.category?.attributes?.iconUrl}'),
                       )),
                   Padding(
-                    padding: new EdgeInsets.only(left: 15.0),
-                    child: Text(
-                      '${widget.category?.attributes?.title}',
-                      overflow:TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    padding:new  EdgeInsets.only(left: 15),
+                    child: SizedBox(
+                      width:70,
+                      child: Text(
+                        '${widget.category?.attributes?.title}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
 
+                      ),
                     ),
                   ),
                 ],

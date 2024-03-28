@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       //backgroundColor: globals.pageBackgroundColor,
       appBar: AppBar(
+        backgroundColor: Colors.deepOrangeAccent,
           title: Text('Back'),
           leading: new IconButton(
               icon: new Icon(Icons.arrow_back),
@@ -91,6 +92,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     create: (context) => _categoryViewModel,
                     child: Consumer<CategoryViewModel>(
                       builder: (context,viewModel,_){
+                        if(viewModel.response.status == null){
+                          return Image.network('https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg',
+                        );
+                        }
                         switch(viewModel.response.status!){
                           case Status.LOADING:
                             return ListView.builder(
