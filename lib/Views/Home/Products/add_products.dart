@@ -32,7 +32,7 @@ class _AddProductsState extends State<AddProducts> {
   final categoryController = Category();
   final _productViewModel = ProductViewModel();
   final _productRequestViewModel = ProductRequestViewModel();
-  final thumbnailController = Thumbnail();
+  //final thumbnailController = Thumbnail();
   final _imageViewModel = ImageViewModel();
   var imgFile;
   var productId;
@@ -200,7 +200,7 @@ class _AddProductsState extends State<AddProducts> {
         rating: rattingController.text,
         description: descriptionController.text,
         quantity: quantityController.text,
-        category: categoryController.toString(),
+       // category: categoryController.toString(),
         thumbnail: imgId.toString(),
         price: priceController.text,
 
