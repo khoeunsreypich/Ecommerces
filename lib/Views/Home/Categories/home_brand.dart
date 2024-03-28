@@ -42,12 +42,13 @@ class _HomeBrandState extends State<HomeBrand> {
                       )),
                   Padding(
                     padding: new EdgeInsets.only(left: 15.0),
-                    child: new Text(
+                    child: Text(
                       '${widget.category?.attributes?.title}',
                       overflow:TextOverflow.ellipsis,
-
+                      maxLines: 1,
                       style:
                       TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+
                     ),
                   ),
                 ],

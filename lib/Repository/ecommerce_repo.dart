@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:ecommerce/Data/network/api_service.dart';
 import 'package:ecommerce/Models/Request/category.dart';
-import 'package:ecommerce/Models/Request/product.dart';
+import 'package:ecommerce/Models/Request/product_request.dart';
+import 'package:ecommerce/Models/response/product.dart';
 import 'package:ecommerce/Res/url.dart';
 
 class EcommerceRepository{
@@ -22,11 +25,14 @@ class EcommerceRepository{
     }
   }
 
-  Future<bool> postProducts(data,{id})async{
-    print('restaurant id $id');
-    var productRequest = productsToJson(data);
-    var url =ClsUrl.postProduct;
-    dynamic response = await apiService.postProduct(url, productRequest);
+  Future<bool> postProducts(data)async{
+    //print('restaurant id $id');
+
+    var productRequest = productRequestToJson(data);
+    //var url = isUpdate? ClsUrl.postProductUrl:ClsUrl.postProductUrl;
+   // print('Posting ..........');
+   var url =ClsUrl.postProductUrl;
+    dynamic response = await apiService.postProduct( url,productRequest);
     return response;
   }
 

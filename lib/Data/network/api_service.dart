@@ -15,19 +15,36 @@ class ApiService {
     }
   }
 
+  Future<dynamic> uploadImage (image,url) async{
+    http.StreamedResponse? response;
+    try{
+      var request = http.MultipartRequest('POST',Uri.parse(url));
+      request.files.add(await http.MultipartFile.fromPath('files',image));
+      response = await request.send();
+      return returnResponse(response);
+    }on Exception{
+      throw FetchDataException(response!.reasonPhrase);
+    }
+  }
+
   Future<dynamic> postProduct (url,data) async{
-    var headers = {'Content-Type': 'application/json'};
-    var request = http.Request('Post',Uri.parse(url));
+    var headers = {
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request('POST', Uri.parse(url));
     request.body=data;
     request.headers.addAll(headers);
+
     http.StreamedResponse response = await request.send();
+
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+     // print(await response.stream.bytesToString());
+      return true;
     }
     else {
-      print(response.reasonPhrase);
+     // print(response.reasonPhrase);
+      return false;
     }
-
   }
 
    returnResponse(http.StreamedResponse response) async {

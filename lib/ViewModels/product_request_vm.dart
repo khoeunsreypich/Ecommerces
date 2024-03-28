@@ -22,21 +22,23 @@ import 'package:ecommerce/Data/response/api_response.dart';
 import 'package:ecommerce/Repository/ecommerce_repo.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../Models/response/product.dart';
+import '../Models/Request/product_request.dart';
 
-class ProductViewModel extends ChangeNotifier{
+class ProductRequestViewModel extends ChangeNotifier{
   final _productRepo = EcommerceRepository();
-  ApiResponse<Products> response = ApiResponse.loading();
-
+  //ApiResponse<ProductRequest> response = ApiResponse.loading();
+  var response = ApiResponse();
   setProductList(response) {
-     this.response = response;
-     notifyListeners();
+    this.response = response;
+    notifyListeners();
   }
-  Future<dynamic> getAllProduct() async {
-   await _productRepo.getAllProducts()
-      .then((product) => setProductList(ApiResponse.completed(product)))
-       .onError((error, stackTrace)
-    => setProductList(ApiResponse.error(stackTrace.toString())));
-   }
+
+  Future<dynamic> postProducts(data) async {
+   // print('Posting.....................');
+    setProductList(ApiResponse.loading());
+    await _productRepo.postProducts(data)
+        .then((isPost) => setProductList(ApiResponse.completed(isPost)))
+        .onError((error, stackTrace) => setProductList(ApiResponse.error(stackTrace.toString())));
+  }
 
 }

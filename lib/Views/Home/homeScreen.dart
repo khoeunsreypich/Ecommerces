@@ -135,14 +135,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       case Status.LOADING:
                         return ListView.builder(
                             scrollDirection:Axis.horizontal,
-                            itemCount: 11,
+                            itemCount: 26,
                             itemBuilder: (context,index) => ProductCardSkeleton());
                       case Status.COMPLETED:
                       return ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: 11,
+                                  itemCount: 26,
                                   itemBuilder: ( context, index) {
-                                    var product = viewModel.response.data!.data![index];
+                                    var product = viewModel.response.data!.data?[index];
                                     return InkWell(
                                         child: HomeProduct(products: product,),
                                     onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetails(products: product,),));},

@@ -38,7 +38,7 @@ dependencies:
   http:
   provider:
   skeletonizer: ^1.0.1
-  image_picker: ^1.0.7
+  image_picker:
   swipe_to:
 
 dev_dependencies:

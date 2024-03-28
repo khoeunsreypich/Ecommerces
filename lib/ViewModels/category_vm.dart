@@ -23,7 +23,7 @@ import 'package:ecommerce/Models/Request/category.dart';
 import 'package:ecommerce/Repository/ecommerce_repo.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../Models/Request/product.dart';
+import '../Models/response/product.dart';
 
 class CategoryViewModel extends ChangeNotifier{
   final _categoryRepo = EcommerceRepository();
